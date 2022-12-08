@@ -1,12 +1,11 @@
-#include <cstdio>
-#include <openssl/evp.h>
 #include <fstream>
-#include <stdlib>
+#include <iostream>
+#include <openssl/evp.h>
 #include <string>
 #include <vector>
 
 using namespace std;
 
 int main() {
-  
+  cout << "Dupa\n";
 }
