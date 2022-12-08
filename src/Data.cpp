@@ -42,28 +42,10 @@ std::vector<std::string> Data::parser(std::string line) {
   std::vector<std::string> parsedLine;
   std::string column;
   std::string quoted;
-
   std::stringstream tmp(line);
-  bool withQuote = false;
-  std::string part = "";
-  while (std::getline(tmp, column, ' ')) {
+  while (std::getline(tmp, column, '\t')) {
     std::stringstream quote(column);
-    do {
-      auto position = column.find("\"");
-      if (position != std::string::npos) {
-        withQuote = !withQuote;
-        part += column.substr(0, position + 1);
-        column = column.substr(position + 1, column.size());
-      }
-    } while (std::getline(quote, quoted, '\"'));
-
-    if (!withQuote) {
-      column += part;
-      parsedLine.emplace_back(std::move(column));
-      part = "";
-    } else {
-      part += column + ",";
-    }
+    parsedLine.emplace_back(std::move(column));
   }
   return parsedLine;
 }
