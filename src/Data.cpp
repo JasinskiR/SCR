@@ -19,7 +19,6 @@ void Data::readFile() {
 
   while (!file.eof()) {
     if (!getline(file, tmp)) continue;
-
     lines.push_back(tmp);
   }
   universalFilter();
@@ -41,10 +40,8 @@ void Data::universalFilter() {
 std::vector<std::string> Data::parser(std::string line) {
   std::vector<std::string> parsedLine;
   std::string column;
-  std::string quoted;
   std::stringstream tmp(line);
   while (std::getline(tmp, column, '\t')) {
-    std::stringstream quote(column);
     parsedLine.emplace_back(std::move(column));
   }
   return parsedLine;
@@ -52,7 +49,7 @@ std::vector<std::string> Data::parser(std::string line) {
 
 void Data::addHash(std::vector<std::string> parsed) {
   Hash hashedLine;
-  if (parsed.size() == 3) {
+  if (parsed.size() == 4) {
     try {
       hashedLine.setOrdNo(stoul(parsed.at(0)));
     } catch (std::invalid_argument const &ex) {
@@ -69,7 +66,7 @@ void Data::addHash(std::vector<std::string> parsed) {
       return;
     }
     try {
-      hashedLine.setUserName(parsed.at(2));
+      hashedLine.setUserName(parsed.at(3));
     } catch (std::invalid_argument const &ex) {
       return;
       hashData.emplace_back(hashedLine);

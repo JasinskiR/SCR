@@ -7,19 +7,18 @@
 
 class Data {
 private:
-  std::vector<Hash> hashData;
+
   std::vector<std::string> lines;
   uint64_t allData{};
   uint64_t numberOfLines{};
 
 public:
-  std::vector<std::string> parse();
+  std::vector<Hash> hashData;
   void readFile();
   void clearVar();
   std::vector<std::string> parser(std::string line);
   void addHash(std::vector<std::string> parsed);
   void universalFilter();
-  ~Data();
 };
 
 #endif
