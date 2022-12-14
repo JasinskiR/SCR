@@ -69,8 +69,8 @@ void Data::addHash(std::vector<std::string> parsed) {
       hashedLine.setUserName(parsed.at(3));
     } catch (std::invalid_argument const &ex) {
       return;
+    }
       hashData.emplace_back(hashedLine);
       numberOfLines++;
-    }
   }
 }

@@ -7,7 +7,7 @@
 #include <bits/stdc++.h>
 
 std::string md5(const std::string& content);
-void passwdCrack(std::vector<Hash> line, std::vector<std::string> dict);
+void passwdCrack(std::vector<Hash> line, const std::vector<std::string>& dict);
 std::vector<std::string> readDictionary();
 
 #endif//SCR_2022_23_PASSWCRACK_HPP

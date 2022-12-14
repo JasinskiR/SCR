@@ -1,6 +1,7 @@
 #include "PasswdCrack.hpp"
 
 std::string md5hash(const std::string& content) {
+  std::stringstream result;
   unsigned char *passwArray;
   passwArray = new unsigned char[content.size() +1];
   strcpy((char *)passwArray, content.c_str());
@@ -9,18 +10,20 @@ std::string md5hash(const std::string& content) {
   MD5(passwArray, content.size(), md);
 
   for (int i = 0; i < MD5_DIGEST_LENGTH; i++) {
-    std::cout << std::setw(2) << std::setfill('0') << std::hex << md[i];
+    result << std::hex << std::setfill('0') << std::setw(2) << (int)md[i];
   }
-  return "";
+  return result.str();
 }
 
-void passwdCrack(std::vector<Hash> line, std::vector<std::string> dict) {
-  for (auto word : dict) {
+void passwdCrack(std::vector<Hash> line, const std::vector<std::string>& dict) {
+  for (const auto& word : dict) {
     std::string hashedWord = md5hash(word);
-    for (auto passw : line) continue ;
-    //if (hashedWord == passw.getHashPasswd())
-    //std::cout << "Password for " << passw.getMail() << " is " << word << std::endl;
-    //}
+    for (unsigned long i = 0; i < line.size() ; i++) {
+      if (hashedWord == line.at(i).getHashPasswd()) {
+        std::cout << "Password for " << line.at(i).getMail() << " is " << word << std::endl;
+        line.erase(line.begin() + i);
+      }
+    }
   }
 }
 
