@@ -1,6 +1,8 @@
 #ifndef HASH_HPP
 #define HASH_HPP
 
+#include <iostream>
+
 class Hash {
 private:
   uint64_t ordinalNo{};
