@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.16.3)
-project(scr_2022_23)
+project(MD5 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-include_directories(inc)
+set(CPU_OPTIONS -Werror -Wall -Wextra -pedantic -ffunction-sections -fdata-sections -Ofast -std=c++17 -lssl -lcrypto)
+add_compile_options(${CPU_OPTIONS})
 
-add_executable(scr_2022_23
-        inc/Data.hpp
-        src/main.cpp
-        src/Data.cpp)
+set(OPENSSL_USE_STATIC_LIBS TRUE)
+find_package(OpenSSL REQUIRED)
+
+add_subdirectory(firmware)
+add_subdirectory(crack)

@@ -1,6 +1,10 @@
 #ifndef HASH_HPP
 #define HASH_HPP
 
+#include "stdint.h"
+#include "string"
+#include <ostream>
+
 class Hash {
 private:
   uint64_t ordinalNo{};
@@ -23,7 +27,7 @@ public:
 
   void setOrdNo(const uint64_t _ordinalNo) { ordinalNo = _ordinalNo; };
 
-  void setHashPasswd(const std::string _passwd) { hashPasswd = _passwd; }
+  void setHashPasswd(const std::string _passwd) { hashPasswd = _passwd; };
 
   void setMail(const std::string _mail) { mail = _mail; };
 
