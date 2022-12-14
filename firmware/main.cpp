@@ -11,5 +11,5 @@ int main() {
   hData.readFile();
   vector<string> libWords = readDictionary();
   passwdCrack(hData.hashData, libWords);
-  cout << "Dupa\n";
+  cout << "End of app\n";
 }
