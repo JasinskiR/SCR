@@ -10,6 +10,7 @@ int main() {
   Data hData;
   hData.readFile();
   vector<string> libWords = readDictionary();
-  passwdCrack(hData.hashData, libWords);
+  //passwdCrack_legacy(hData.hashData, libWords);
+  passwdCrack_No(hData.hashData, libWords);
   cout << "End of app\n";
 }
