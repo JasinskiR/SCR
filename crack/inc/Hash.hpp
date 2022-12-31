@@ -1,9 +1,12 @@
 #ifndef HASH_HPP
 #define HASH_HPP
 
-#include "stdint.h"
 #include "string"
+#include <cstdint>
 #include <ostream>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
 
 class Hash {
 private:
@@ -32,6 +35,10 @@ public:
   void setMail(const std::string _mail) { mail = _mail; };
 
   void setUserName(const std::string _userName) { userName = _userName; };
+
+  bool operator==(const Hash &other) const {
+    return other.getHashPasswd() == this->getHashPasswd();
+  }
 };
 
 

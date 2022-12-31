@@ -1,9 +1,7 @@
 #include "Data.hpp"
 
-#include <bits/stdc++.h>
-
 void Data::readFile() {
-  lines.erase(lines.begin(), lines.end());
+  lines.clear();
   std::string tmp;
   std::cout << "Enter a file name: ";
   std::string fileName;
@@ -19,21 +17,22 @@ void Data::readFile() {
 
   while (!file.eof()) {
     if (!getline(file, tmp)) continue;
-    lines.push_back(tmp);
+    lines.emplace_back(tmp);
   }
   universalFilter();
   allData = numberOfLines;
 }
 
 void Data::clearVar() {
-  hashData.erase(hashData.begin(), hashData.end());
-  numberOfLines = 0;
+  this->hash2Hash.clear();
+  this->hashPasswd.clear();
+  this->numberOfLines = 0;
 }
 
 void Data::universalFilter() {
   clearVar();
-  for (uint64_t i = 0; i < lines.size(); ++i) {
-    addHash(parser(lines.at(i)));
+  for (const auto & line : lines) {
+    addHash(parser(line));
   }
 }
 
@@ -70,7 +69,9 @@ void Data::addHash(std::vector<std::string> parsed) {
     } catch (std::invalid_argument const &ex) {
       return;
     }
-      hashData.emplace_back(hashedLine);
-      numberOfLines++;
+
+    hash2Hash[hashedLine.getHashPasswd()] = hashedLine;
+    hashPasswd.emplace(hashedLine.getHashPasswd());
+    numberOfLines++;
   }
 }

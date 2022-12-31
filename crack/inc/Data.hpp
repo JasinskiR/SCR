@@ -1,19 +1,20 @@
 #ifndef DATA_HPP
 #define DATA_HPP
 
-#include <string>
-#include <vector>
 #include "Hash.hpp"
+#include <bits/stdc++.h>
 
 class Data {
 private:
-
   std::vector<std::string> lines;
   uint64_t allData{};
   uint64_t numberOfLines{};
 
+
 public:
-  std::vector<Hash> hashData;
+  std::unordered_map<std::string, Hash> hash2Hash;
+  std::unordered_set<std::string> hashPasswd;
+  std::vector<std::pair<std::string, Hash>> crackedPasswd;
   void readFile();
   void clearVar();
   std::vector<std::string> parser(std::string line);

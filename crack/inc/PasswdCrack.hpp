@@ -1,16 +1,12 @@
 #ifndef SCR_2022_23_PASSWCRACK_HPP
 #define SCR_2022_23_PASSWCRACK_HPP
 
-#include "Data.hpp"
+#include <bits/stdc++.h>
 #include <openssl/evp.h>
 #include <openssl/md5.h>
-#include <bits/stdc++.h>
 
-std::string md5(const std::string& content);
-void passwdCrack_legacy(std::vector<Hash> line, const std::vector<std::string>& dict);
-void passwdCrack_No(std::vector<Hash> line, const std::vector<std::string>& dict);
 
-bool checkPassword(const std::string& hashedWord, const std::string& password, const std::string& mail, const std::string& word);
+std::string md5hash(const std::string &content);
 std::vector<std::string> readDictionary();
 
 #endif//SCR_2022_23_PASSWCRACK_HPP
