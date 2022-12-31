@@ -1,4 +1,4 @@
-set(DEPENDENCIES_LIST crack OpenSSL::SSL)
+set(DEPENDENCIES_LIST crack threads OpenSSL::SSL)
 
 add_executable(firmware main.cpp)
 
