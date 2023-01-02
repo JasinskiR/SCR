@@ -16,18 +16,15 @@ std::string md5hash(const std::string &content) {
   return result.str();
 }
 
-std::vector<std::string> readDictionary() {
+std::vector<std::string> readDictionary(std::string dict_f) {
   std::vector<std::string> words;
   std::string tmp;
-  std::cout << "Enter a file name: ";
-  std::string fileName;
-  std::cin >> fileName;
 
   std::fstream file;
-  file.open(fileName, std::ios::in);
+  file.open(dict_f, std::ios::in);
   if (!file.good()) {
-    throw std::invalid_argument("The file " + fileName +
-                                " was not opened properly or " + fileName +
+    throw std::invalid_argument("The file " + dict_f +
+                                " was not opened properly or " + dict_f +
                                 "does not exist!");
   }
 
