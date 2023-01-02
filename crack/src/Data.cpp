@@ -1,17 +1,15 @@
 #include "Data.hpp"
 
-void Data::readFile() {
+void Data::readFile(const std::string& hash_f) {
+  clearVar();
   lines.clear();
   std::string tmp;
-  std::cout << "Enter a file name: ";
-  std::string fileName;
-  std::cin >> fileName;
 
   std::fstream file;
-  file.open(fileName, std::ios::in);
+  file.open(hash_f, std::ios::in);
   if (!file.good()) {
-    throw std::invalid_argument("The file " + fileName +
-                                " was not opened properly or " + fileName +
+    throw std::invalid_argument("The file " + hash_f +
+                                " was not opened properly or " + hash_f +
                                 "does not exist!");
   }
 
@@ -20,7 +18,6 @@ void Data::readFile() {
     lines.emplace_back(tmp);
   }
   universalFilter();
-  allData = numberOfLines;
 }
 
 void Data::clearVar() {
