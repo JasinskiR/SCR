@@ -7,6 +7,7 @@ using namespace std;
 Data hData;
 void start_threads(vector<pair<vector<string>, Data *>> &p, Data *&ptrData) {
   pthread_create(&listener, &attr, Listener, &ptrData);
+
   pthread_create(&threads[0], &attr, &passwdCrack_legacy, &p[0]);
   pthread_create(&threads[1], &attr, &passwdCrack_No_prefix, &p[0]);
   pthread_create(&threads[2], &attr, &passwdCrack_No_sufix, &p[0]);
@@ -27,9 +28,10 @@ void start_threads(vector<pair<vector<string>, Data *>> &p, Data *&ptrData) {
 }
 
 void stop_threads() {
-  for (int i = 0; i <= 15; i++) {
+  for (int i = 0; i < 15; i++) {
     pthread_cancel(threads[i]);
   }
+  pthread_cancel(listener);
 }
 
 void signal_handler(int signal_num);
@@ -56,9 +58,13 @@ int main(int argc, char *argv[]) {
 
   while (true) {
     cin >> new_file;
+    cout << num_of_workers << endl;
     stop_threads();
-    pthread_mutex_lock(&mutex_);
+
+    pthread_mutex_unlock(&mutex_);
+
     hData.readFile(new_file);
+    num_of_workers = 15;
     pthread_mutex_unlock(&mutex_);
     start_threads(dataVec, ptrhData);
   }
