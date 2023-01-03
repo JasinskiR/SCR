@@ -23,6 +23,7 @@ void *Listener(void *data) {
     while (!condition) {
       pthread_cond_wait(&condvar, &mutex_);
       if (!num_of_workers) {
+        std::cout<<"All threads have reached to the end" << std::endl;
         pthread_exit(nullptr);
       }
     }

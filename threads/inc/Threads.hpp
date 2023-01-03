@@ -6,7 +6,7 @@
 #include <pthread.h>
 
 pthread_t threads[200];
-int num_of_workers = 20;
+int num_of_workers = 15;
 pthread_t listener;
 bool condition;
 
