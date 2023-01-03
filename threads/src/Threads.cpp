@@ -91,3 +91,18 @@ void *passwdCrack_No_prefixANDsufix(void *p) {
   pthread_mutex_unlock(&mutex_);
   pthread_exit(nullptr);
 }
+
+void *passwdCrack_doubleWord(void *p) {
+  auto pair_ = static_cast<std::pair<std::vector<std::string>, Data *> *>(p);
+  auto lib = pair_->first;
+  for (const auto &word1: lib) {
+    for (const auto &word2: lib) {
+      crackCore(word1 + " " + word2, pair_->second);
+    }
+  }
+  pthread_mutex_lock(&mutex_);
+  num_of_workers--;
+  pthread_cond_signal(&condvar);
+  pthread_mutex_unlock(&mutex_);
+  pthread_exit(nullptr);
+}

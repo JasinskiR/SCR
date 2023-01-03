@@ -6,7 +6,7 @@
 #include <pthread.h>
 
 pthread_t threads[200];
-int num_of_workers = 4;
+int num_of_workers = 20;
 pthread_t listener;
 bool condition;
 
@@ -20,4 +20,5 @@ void *passwdCrack_legacy(void *dict);
 void *passwdCrack_No_prefix(void *dict);
 void *passwdCrack_No_sufix(void *dict);
 void *passwdCrack_No_prefixANDsufix(void *dict);
+void *passwdCrack_doubleWord(void *dict);
 
