@@ -34,3 +34,20 @@ std::vector<std::string> readDictionary(std::string dict_f) {
   }
   return words;
 }
+
+std::vector<std::string> firstUpperCase(std::vector<std::string> dict) {
+  std::vector<std::string> tmp = dict;
+  for (auto &word: tmp) {
+    if (word[0] >= 'a' && word[0] <= 'z')
+      word[0] = toupper(word[0]);
+  }
+  return tmp;
+}
+
+std::vector<std::string> allUpperCase(std::vector<std::string> dict) {
+  std::vector<std::string> tmp = dict;
+  for (auto &word: tmp) {
+    std::transform(word.begin(), word.end(), word.begin(), ::toupper);
+  }
+  return tmp;
+}
