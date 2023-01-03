@@ -1,10 +1,11 @@
 #include "Threads.cpp"
 #include "Threads.hpp"
+#include <csignal>
 #include <iostream>
 
 using namespace std;
-
-void start_threads(pair<vector<string>, Data *> &p, Data* &ptrData) {
+Data hData;
+void start_threads(pair<vector<string>, Data *> &p, Data *&ptrData) {
   pthread_create(&listener, &attr, Listener, &ptrData);
   pthread_create(&threads[0], &attr, &passwdCrack_legacy, &p);
   pthread_create(&threads[1], &attr, &passwdCrack_No_prefix, &p);
@@ -19,13 +20,15 @@ void stop_threads() {
   pthread_cancel(threads[3]);
 }
 
+void signal_handler(int signal_num);
+
 int main(int argc, char *argv[]) {
   if (argc != 3) {
     throw std::invalid_argument("Invalid number of arguments Required " + to_string(2) +
                                 " provided " + to_string(argc));
   }
+  signal(SIGHUP, signal_handler);
 
-  Data hData;
   Data *ptrhData = &hData;
   hData.readFile(argv[1]);
   vector<string> libWords = readDictionary(argv[2]);
@@ -37,15 +40,18 @@ int main(int argc, char *argv[]) {
   start_threads(pairV, ptrhData);
 
 
-  while(true) {
+  while (true) {
     cin >> new_file;
     stop_threads();
     pthread_mutex_lock(&mutex_);
     hData.readFile(new_file);
     pthread_mutex_unlock(&mutex_);
     start_threads(pairV, ptrhData);
-
   }
 
   cout << "__________________________\n";
+}
+
+void signal_handler(int) {
+  hData.showAll();
 }
