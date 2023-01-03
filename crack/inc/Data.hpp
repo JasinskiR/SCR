@@ -18,6 +18,7 @@ public:
   std::vector<std::string> parser(std::string line);
   void addHash(std::vector<std::string> parsed);
   void universalFilter();
+  void showAll();
 };
 
 #endif

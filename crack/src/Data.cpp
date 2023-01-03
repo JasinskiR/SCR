@@ -20,6 +20,14 @@ void Data::readFile(const std::string& hash_f) {
   universalFilter();
 }
 
+void Data::showAll() {
+  std::cout<<"All cracked passwords:" << std::endl;
+  for(const auto& user : crackedPasswd) {
+    std::cout << "\t -Password for " << user.second.getMail()
+              << " is " << user.first << std::endl;
+  }
+}
+
 void Data::clearVar() {
   this->hash2Hash.clear();
   this->hashPasswd.clear();
