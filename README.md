@@ -8,4 +8,7 @@ Repository created to store projects created during "Operating Systems" project 
 
 Below information for each task can be found:
 ## Projects
-- [ ] [#MD5](In progress)
+- MD5\
+    `Input files should have LF control characters.` 
+\
+In other case, data will not be read properly.
